@@ -1,0 +1,22 @@
+#saveButton{
+    position: absolute;
+    left: 60vw;
+}
+
+.jumbotron{
+    padding-top: 30px;
+    margin-top: 20px;
+}
+
+body{
+    background-image: url(https://www.hagmannreport.com/wp-content/uploads/2018/02/hagmann-web-background4.png);
+}
+#headlineTxt{
+    margin: 0
+}
+#summaryTxt{
+    margin-top: 15px;
+}
+#getSome{
+    float: left;
+}
