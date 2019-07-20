@@ -20,8 +20,8 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 //routes here
-app.get("/getSome", (req, res) => {
-    axios.get("https://www.foxnews.com/category/us/us-regions/midwest").then( response => {
+app.post("/sendSome", (req, res) => {
+    axios.get(`https://www.foxnews.com/category/us/us-regions/${req.body.region}`).then( response => {
         var result = [];
         var $ = cheerio.load(response.data);
 
@@ -55,48 +55,48 @@ app.get("/getArticles", (req, res) => {
         if(err) console.warn(err);
         else res.json(data)
     });
-})
+});
 
 app.get("/resetArticles", (req, res) => {
 
     db.NYT_articles.remove({}, (err, data)=>{
         if(err) console.warn(err)
         else res.json(data)
-    })
-})
+    });
+});
 
 app.get("/getArticle/:id", (req, res) => {
 
     db.NYT_articles.find({_id: mongojs.ObjectId(req.params.id)}, (err, data) => {
         if(err) console.warn(err);
         else res.json(data)
-    }) 
-})
+    });
+});
 
 app.get("/getSaved", (req, res) => {
     db.Saved_Articles.find({"deleted": false}, (err, data) => {
         if(err) console.warn(err);
         else res.json(data)
     }) 
-})
+});
 
 app.post("/addSaved", (req, res) => {
     db.Saved_Articles.create(req.body)
-})
+});
 
 app.post("/addComment/:id", (req, res) => {
     db.Saved_Articles.updateOne({_id: mongojs.ObjectID(req.params.id)}, {$push: req.body}, (err, data)=>{
         if(err) console.warn(err);
     })
     res.end();
-})
+});
 
 app.get("/deleteSaved/:id", (req, res) => {
     db.Saved_Articles.updateOne({_id: mongojs.ObjectID(req.params.id)}, {$set:{"deleted": true}}, (err, data) =>{
-        console.log(data)
+        if(err) console.warn(err)
     })
     res.end();
-})
+});
 
 app.listen(PORT, () => {
     console.log("App running on port " + PORT + "!");

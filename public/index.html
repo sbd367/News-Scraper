@@ -13,6 +13,7 @@
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <script src="app.js"></script>
@@ -48,9 +49,22 @@
       <a class="nav-item nav-link" href="./saved.html">Saved</a>
     </div>
   </div>
-  <ul class="nav justify-content-end">
+  <ul class="nav pull-right">
     <li class="nav-item">
       <input class="btn btn-success float-right" type="submit" value="Scrape new articles" id="getSome">
+    </li>
+    <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Region
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" value="west" href="#">West</a>
+            <a class="dropdown-item" value="northeast" href="#">North East</a>
+            <a class="dropdown-item" value="midwest" href="#">Midwest</a>
+            <a class="dropdown-item" value="southeast" href="#">South East</a>
+            <a class="dropdown-item" value="southwest" href="#">South West</a>
+            <a class="dropdown-item" value="south" href="#">South</a>
+          </div>
     </li>
 </ul>
 </nav>

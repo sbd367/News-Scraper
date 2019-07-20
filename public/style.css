@@ -20,3 +20,6 @@ body{
 #getSome{
     float: left;
 }
+.dropdown-menu{
+    float: left !important;
+}

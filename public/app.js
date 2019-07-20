@@ -92,10 +92,14 @@ $(document).on("click", "#saveButton", function(){
         alert(`Saved Article: ${savedArt.Headline}`);
     })
 })
-
+var reqH = null;
 $(document).on("click", "#getSome", () => {
-    $.get("/resetArticles").done(() => {
-        $.ajax("/getSome").done( () => {
+    $.get("/resetArticles").done(() => { 
+        $.ajax({
+            method: "POST",
+            url: "/sendSome",
+            data: {'region': reqH}
+        }).done(() => {
             getArticles();
         });
     });
@@ -106,11 +110,36 @@ $(document).on("click", "#deleteButton", function(){
     $.get("/deleteSaved/"+leID);
     getSaved();
 });
+
+$(document).on('click', '.dropdown-item', function() {
+    let site = $(this).attr('value')
+    $(this).attr('class', 'dropdown-item active');
+    switch (site){
+        case 'west':
+            $('.nav-link.dropdown-toggle').text('West');
+            return reqH = 'west'
+        case 'south':
+            $('.nav-link.dropdown-toggle').text('South');
+            return reqH = 'south'
+        case 'midwest':
+            $('.nav-link.dropdown-toggle').text('Midwest');
+            return reqH = 'midwest'
+        case 'southwest':
+            $('.nav-link.dropdown-toggle').text('South West');
+            return reqH = 'southwest'
+        case 'southeast':
+            $('.nav-link.dropdown-toggle').text('South East');
+            return reqH = 'southeast'
+        case 'northeast':
+            $('.nav-link.dropdown-toggle').text('North East');
+            return reqH = 'northeast'
+    };
+});
+
 (() => {
     if(window.location.pathname.includes('saved.html')){
         getSaved();
     } else {
         getArticles();
     };
-
 })();
