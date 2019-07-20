@@ -62,7 +62,7 @@ app.get("/getArticles", (req, res) => {
 
 app.get("/resetArticles", (req, res) => {
 
-    db.NYT_articles.remove({}, (err, data)=>{
+    db.NYT_articles.deleteMany({}, (err, data)=>{
         if(err) console.warn(err)
         else res.json(data)
     }).catch(err => {
