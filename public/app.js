@@ -7,6 +7,8 @@ const getArticles = () => {
         $("#articles").append("<a class='list-group-item list-group-item-action'><h4 id='headlineTxt'>Headline: </h4> "+data[i].Headline+
         "<input type='submit' value='Save' data-id='"+data[i]._id+"' id='saveButton' class='btn btn-success'><br> <h4 id='summaryTxt'>Summary: </h4> "+data[i].Summary+"</a>");
         }
+    }).catch(err => {
+        if(err) console.warn(err)
     });
 }
 
@@ -107,7 +109,9 @@ $(document).on("click", "#getSome", () => {
 
 $(document).on("click", "#deleteButton", function(){
     let leID = $(this).attr("data-id")
-    $.get("/deleteSaved/"+leID);
+    $.get("/deleteSaved/"+leID).catch(err => {
+        if(err) console.warn(err)
+    });
     getSaved();
 });
 
