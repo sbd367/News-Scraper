@@ -57,9 +57,7 @@ app.get("/getArticles", (req, res) => {
     db.NYT_articles.find({}, (err, data) => {
         if(err) console.warn(err);
         else res.json(data)
-    }).catch(err => {
-        if(err) console.warn(err)
-    })
+    });
 });
 
 app.get("/resetArticles", (req, res) => {
@@ -67,8 +65,6 @@ app.get("/resetArticles", (req, res) => {
     db.NYT_articles.deleteMany({}, (err, data)=>{
         if(err) console.warn(err)
         else res.json(data)
-    }).catch(err => {
-        if(err) console.warn(err)
     });
 });
 
@@ -77,8 +73,6 @@ app.get("/getArticle/:id", (req, res) => {
     db.NYT_articles.find({_id: mongojs.ObjectId(req.params.id)}, (err, data) => {
         if(err) console.warn(err);
         else res.json(data)
-    }).catch(err => {
-        if(err) console.warn(err)
     });
 });
 
@@ -86,8 +80,6 @@ app.get("/getSaved", (req, res) => {
     db.Saved_Articles.find({"deleted": false}, (err, data) => {
         if(err) console.warn(err);
         else res.json(data)
-    }).catch(err => {
-        if(err) console.warn(err);
     });
 });
 
