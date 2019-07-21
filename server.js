@@ -16,11 +16,13 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-if(process.env.PORT) var MONGODB_URI = process.env.URL
-else MONGODB_URI = "mongodb://localhost/mongoHeadlines";
-
-
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+if(process.env.PORT){
+    var MONGODB_URI = process.env.URL
+    mongoose.connect(MONGODB_URI, { dbName: 'test' });
+}else{
+    MONGODB_URI = "mongodb://localhost/mongoHeadlines";
+    mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+}
 
 //routes here
 app.post("/sendSome", (req, res) => {
