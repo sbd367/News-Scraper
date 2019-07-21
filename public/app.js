@@ -49,20 +49,20 @@ $(document).on("click", "#deleteButton", () => {
 $(document).on("click", "#sendComment", () => {
 
     if($("#commentTxt").val() !== ""){
-    let selectedID = $('div.modal-body input').attr("data-id"),
-        newComment = $("#commentTxt").val(),
-        newCommentObj = {
-        Comments: newComment
-    };
-
-    $.ajax({
-        method: "POST",
-        url: "/addComment/"+selectedID,
-        data: newCommentObj
-      })
-    .then( () => {
-        window.location.reload();
-    });
+        let selectedID = $('div.modal-body input').attr("data-id"),
+            newComment = $("#commentTxt").val(),
+            newCommentObj = {
+            Comments: newComment
+        };
+        console.log('this')
+        $.ajax({
+            method: "POST",
+            url: "/addComment/"+selectedID,
+            data: newCommentObj
+        })
+        .then( () => {
+            window.location.reload();
+        });
 
     }else
     {

@@ -20,7 +20,10 @@ var SavedSchema = new Schema({
         required: false
     },
 
-    Comments:[],
+    Comments:{
+        type: Array,
+        required: false
+    },
 
     deleted:{
         type: Boolean,

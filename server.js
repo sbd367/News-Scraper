@@ -1,3 +1,4 @@
+require('dotenv').config();
 let express = require('express');
 let logger = require('morgan');
 let mongoose = require('mongoose');
@@ -15,8 +16,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-console.log(process.env.MONGODB_URI)
+if(process.env.PORT) var MONGODB_URI = process.env.URL
+else MONGODB_URI = "mongodb://localhost/mongoHeadlines";
+
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
@@ -94,10 +96,9 @@ app.post("/addSaved", (req, res) => {
 });
 
 app.post("/addComment/:id", (req, res) => {
-    db.Saved_Articles.updateOne({_id: mongojs.ObjectID(req.params.id)}, {$push: req.body}, (err, data)=>{
-        if(err) console.warn(err);
-    }).catch(err => {
+    db.Saved_Articles.findOneAndUpdate({_id: mongojs.ObjectID(req.params.id)}, {$push: req.body}, (err, data)=>{
         if(err) console.warn(err)
+        else console.log(data);
     });
     res.end();
 });
